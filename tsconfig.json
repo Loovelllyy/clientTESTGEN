@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "target": "es5",
+//    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+//    "types": ["node"]
+//    "types": ["@emotion/core"]
+    "typeRoots": ["./@types", "./node_modules/@types", "./media.d.ts", "./d3.d.ts"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+
+  },
+  "paths": {
+    "~media": "src/media"
+  }
+//  "include": ["./src/media.d.ts"]
+}

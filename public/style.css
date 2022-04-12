@@ -1,0 +1,8 @@
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    color: #2e4f47;
+    font-size: 18pt;
+    overflow-y: hidden;
+}

@@ -1,0 +1,6 @@
+:root {
+    --mainColorText: #3E514A;
+    --bgGradient: linear-gradient(45deg, #85bebe 0%, #497a6d 100%);
+    --bgMainColor: #E4E4E4;
+    --bgList: #B6C6C0;
+}

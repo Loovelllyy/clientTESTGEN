@@ -9,7 +9,7 @@ interface TProps {
 
 const Answer = ({answerVar, valAnswer}: TProps) => {
 	return (
-		<FormControlLabel value={valAnswer} control={<Radio />} label={answerVar} />
+		<FormControlLabel value={valAnswer} control={<Radio />} label={answerVar}  />
 	);
 };
 

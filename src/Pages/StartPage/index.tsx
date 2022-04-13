@@ -1,9 +1,10 @@
 import React from "react";
 import {Button, Box } from "@mui/material";
 import {Link} from "react-router-dom";
+import {css} from "@emotion/react";
 
 import Logo from '~media/logo.png'
-import {css} from "@emotion/react";
+import { btnStyle } from '../../../public/style'
 
 const Start = () => {
 
@@ -15,16 +16,6 @@ const Start = () => {
         justify-content: space-evenly;
         background: var(--bgGradient);
     `;
-
-    const btnStyle = {
-        mb: '30px',
-        color: 'white',
-        background: 'rgba(255,255,255,0.28)',
-        border: '1px solid rgba(255,255,255,0.15)',
-        ':hover': {
-            border: '1px solid white'
-        }
-    }
 
     const logo = css`
         animation: from-top 3s;

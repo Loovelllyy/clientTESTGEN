@@ -10,7 +10,6 @@ export const wrapper = css`
 `;
 
 export const style = css`
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -28,12 +27,9 @@ export const wrapperStyle = css`
   height: 500px;
 `
 
-export const button = css`
-  height: max-content;
-  width: max-content;
-  padding: 10px 20px;
-`
 export const linkStyle = css`
   text-decoration: none;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

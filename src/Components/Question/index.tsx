@@ -10,16 +10,20 @@ import {Link} from "react-router-dom";
 import {style, wrapperStyle, linkStyle, wrapper} from './styles'
 import {btnStyle} from "../../../public/style";
 
-// interface TProps {
-// 	quest: string;
-// 	answersVar: string[]
-// }
+interface IProps {
+	quest: string;
+	answersVar: string[]
+}
 
-const Question = (data: unknown) => {
+const Question = ({ data }: { data: IProps[] }) => {
 
-	const [isDone, isDoneSet] = useState(true);
-
+	const [isDone, isDoneSet] = useState(false);
 	const [checkedAnswer, checkedAnswerSet] = useState('');
+
+	const [counter, counterSet] = useState(1);
+
+	const [currentData, currentDataSet] = useState<IProps>(data[0]);
+
 
 	const setArr = (arr: string[], item: string) => {
 		arr.push(item);
@@ -32,7 +36,25 @@ const Question = (data: unknown) => {
 		arr.length = 0;
 	}
 
-	const question = 'This is a question'
+	console.log(checkedAnswer)
+
+	// TODO add checking on submit button, add func submit
+
+	const clickNext = (values: {answers: string[]}) => {
+		if(!checkedAnswer) {
+			alert('Выберите вариант ответа!');
+			return;
+		}
+
+		setArr(values.answers, checkedAnswer);
+		currentDataSet(data[counter]);
+		counterSet(prevState => prevState + 1);
+		if (counter === data.length - 1) {
+			isDoneSet(true)
+		}
+
+		checkedAnswerSet('');
+	}
 
 	return (
 		<div css={ wrapper }>
@@ -50,17 +72,19 @@ const Question = (data: unknown) => {
 					{({ values }) => (
 						<Form>
 							<RadioGroup css={wrapperStyle} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" onChange={(e) => {checkedAnswerSet(e.target.value)}}>
-								<FormLabel id="demo-row-radio-buttons-group-label" css={css` display: block;`}>{question}</FormLabel>
-								<Answer valAnswer='a' answerVar='adjnkajs' />
-								<Answer valAnswer='b' answerVar='fsdhf' />
-								<Answer valAnswer='c' answerVar='fkjsdfks' />
+								<FormLabel id="demo-row-radio-buttons-group-label" css={css` display: block;`}>{currentData.quest}</FormLabel>
+								{
+									currentData?.answersVar.map((el => {
+										return <Answer key={el} valAnswer={el} answerVar={el} />
+									}))
+								}
 								{isDone ?
 									<Link to='/answer' css={ linkStyle }>
 										<Button variant="outlined" type="submit" sx={ btnStyle } onClick={() => {arrClean(values.answers)}}>Узнать результат</Button>
 									</Link>
 									:
 									<div css={ linkStyle }>
-										<Button variant="outlined" type="button" sx={ btnStyle }  onClick={() => setArr(values.answers, checkedAnswer)}>К следующему вопросу</Button>
+										<Button variant="outlined" type="button" sx={ btnStyle }  onClick={() => clickNext(values)}>К следующему вопросу</Button>
 									</div>
 								}
 							</RadioGroup>

@@ -7,7 +7,7 @@ import HomePage from "./Pages/HomePage";
 import NotFoundPage from './Pages/NotFoundPage'
 import QuestionPage from "./Pages/QuestionPage";
 import Loader from "./Components/Loader";
-import AnswerPage from "./Pages/AnswerPage";
+import AnswerPage from "./Pages/EndPage";
 
 
 function App() {

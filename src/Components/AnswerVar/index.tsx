@@ -7,10 +7,10 @@ interface TProps {
 	answerVar: string;
 }
 
-const Answer = ({answerVar, valAnswer}: TProps) => {
+const AnswerVar = ({answerVar, valAnswer}: TProps) => {
 	return (
 		<FormControlLabel value={valAnswer} control={<Radio />} label={answerVar}  />
 	);
 };
 
-export default Answer;
+export default AnswerVar;

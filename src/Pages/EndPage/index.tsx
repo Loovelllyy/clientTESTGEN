@@ -1,17 +1,15 @@
 import React from 'react';
-import Graph from "../../Components/Graph";
 import withLoader from "../../HOC/withLoader";
-import Diagramm from "../../Components/Diagramm";
+import Diagram from "../../Components/Diagram";
 
-function AnswerPage() {
+function EndPage() {
 	return(
 		<>
-			<Graph />
-			<Diagramm/>
+			<Diagram/>
 		</>
 	)
 }
 
-const WrappedComponent = withLoader(AnswerPage, '')
+const WrappedComponent = withLoader(EndPage, '')
 
 export default WrappedComponent;

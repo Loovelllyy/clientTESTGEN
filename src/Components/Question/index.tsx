@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {FormLabel, RadioGroup, Button } from "@mui/material";
 import {Form, Formik} from "formik";
-import Answer from "../Answer";
+import AnswerVar from "../AnswerVar";
 import {css} from "@emotion/react"
 import withLoader from "../../HOC/withLoader";
 import {Link} from "react-router-dom";
@@ -75,7 +75,7 @@ const Question = ({ data }: { data: IProps[] }) => {
 								<FormLabel id="demo-row-radio-buttons-group-label" css={css` display: block;`}>{currentData.quest}</FormLabel>
 								{
 									currentData?.answersVar.map((el => {
-										return <Answer key={el} valAnswer={el} answerVar={el} />
+										return <AnswerVar key={el} valAnswer={el} answerVar={el} />
 									}))
 								}
 								{isDone ?

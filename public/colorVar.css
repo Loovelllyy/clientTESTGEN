@@ -3,4 +3,8 @@
     --bgGradient: linear-gradient(45deg, #85bebe 0%, #497a6d 100%);
     --bgMainColor: #E4E4E4;
     --bgList: #B6C6C0;
+
+    --bgTotal: #c7d7cd;
+    --bgCorrect: #4ED45B;
+    --bgIncorrect: #FD5967;
 }

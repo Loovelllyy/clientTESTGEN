@@ -3,6 +3,6 @@ html, body, #root {
     padding: 0;
     height: 100vh;
     color: #2e4f47;
-    font-size: 18pt;
+    font: 1.3em 'Droid Sans Mono', serif;
     overflow-y: hidden;
 }

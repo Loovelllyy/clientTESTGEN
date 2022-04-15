@@ -7,7 +7,7 @@ import HomePage from "./Pages/HomePage";
 import NotFoundPage from './Pages/NotFoundPage'
 import QuestionPage from "./Pages/QuestionPage";
 import Loader from "./Components/Loader";
-import AnswerPage from "./Pages/EndPage";
+import AnswerPage from "./Pages/ResultPage";
 
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 				<Route path='/home' element={<HomePage/>}/>
 				<Route path={`/question/${1}`} element={<QuestionPage/>}/>
 				<Route path='/test' element={<Loader/>}/>
-				<Route path='/answer' element={<AnswerPage/>}/>
+				<Route path='/result' element={<AnswerPage/>}/>
 			</Routes>
 		</BrowserRouter>
 	);

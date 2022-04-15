@@ -36,8 +36,6 @@ const Question = ({ data }: { data: IProps[] }) => {
 		arr.length = 0;
 	}
 
-	console.log(checkedAnswer)
-
 	// TODO add checking on submit button, add func submit
 
 	const clickNext = (values: {answers: string[]}) => {
@@ -79,7 +77,7 @@ const Question = ({ data }: { data: IProps[] }) => {
 									}))
 								}
 								{isDone ?
-									<Link to='/answer' css={ linkStyle }>
+									<Link to='/res' css={ linkStyle }>
 										<Button variant="outlined" type="submit" sx={ btnStyle } onClick={() => {arrClean(values.answers)}}>Узнать результат</Button>
 									</Link>
 									:

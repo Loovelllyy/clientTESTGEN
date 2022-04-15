@@ -29,16 +29,6 @@ const TestList = () => {
 		<div css={ styleWrapper }>
 			<Test key={1} id={1} nameTest='11111'/>
 			<Test key={0} id={0} nameTest='0000000'/>
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
-			{/*<Test/>*/}
 		</div>
 	)
 }

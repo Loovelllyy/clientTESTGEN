@@ -77,7 +77,7 @@ const Question = ({ data }: { data: IProps[] }) => {
 									}))
 								}
 								{isDone ?
-									<Link to='/res' css={ linkStyle }>
+									<Link to='/result' css={ linkStyle }>
 										<Button variant="outlined" type="submit" sx={ btnStyle } onClick={() => {arrClean(values.answers)}}>Узнать результат</Button>
 									</Link>
 									:

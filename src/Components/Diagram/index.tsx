@@ -2,20 +2,23 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from "d3";
 import {css} from "@emotion/react";
 
-import {IData} from "../ResultList";
+import {IData} from "../../Pages/ResultPage";
 
-function Diagram({data}: any) {
+interface IMyData {
+	num: number,
+	color: string,
+}
+
+function Diagram({data}: { data: IData }) {
 	const width = 400;
 	const height = 400;
 
-	// const data: IData[] = [{type: 'correct' , num: 15, color: '#4ED45B'}, {type: 'incorrect', num: 70, color: '#FD5967'}]
-
 	let radius =  Math.min(width, height) / 2.5;
+
 	const divContainer = useRef()
-	console.log(data)
 
 	useEffect(() => {
-		console.log(data)
+		const myData: IMyData[] = [{num: data.correct, color: 'var(--bgCorrect)'}, {num: data.incorrect, color: 'var(--bgIncorrect)'}];
 
 		d3.selectAll('svg').remove();
 
@@ -27,21 +30,19 @@ function Diagram({data}: any) {
 		let g = container.append("g")
 			.attr("transform", `translate(${radius}, ${radius})`);
 
-		let pie = d3.pie().value(function(d: IData) {
-			return d.num;
-		});
+		let pie = d3.pie().value((d: IMyData) => d.num );
 
 		let path = d3.arc()
 			.outerRadius(radius)
 			.innerRadius(70);
 
 		g.selectAll(".donutArcSlices")
-			.data(pie(data))
+			.data(pie(myData))
 			.enter().append("path")
 			.style('width', '100%')
 			.attr("class", "donutArcSlices")
 			.attr("d", path)
-			.attr("fill", function(d: { data: IData; }) { return d.data.color; })
+			.attr("fill", (d: { data: IMyData }) => d.data.color )
 
 		// text on diagram
 			// .each(function(d: IData, i: number) {

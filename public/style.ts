@@ -1,9 +1,12 @@
-export const btnStyle = {
-	mb: '30px',
-	color: 'white',
-	background: 'rgba(255,255,255,0.28)',
-	border: '1px solid rgba(255,255,255,0.15)',
-	':hover': {
-		border: '1px solid white'
-	}
-}
+import {css} from "@emotion/react";
+
+export const wrapperStyle = css`
+  background: var(--bgMainColor);
+  display: flex;
+  flex-direction: column;   
+  align-items: center;	  
+  justify-content: center;	  
+  height: 100%;	  
+  width: 100%;
+  text-align: center;  	
+`;

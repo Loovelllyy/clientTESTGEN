@@ -1,10 +1,10 @@
 import React from "react";
 import style from './style.module.css'
 
-const WaitingPage = () => {
+const WaitingBackground = ({ children }: { children: unknown }) => {
   return (
       <div className={style.body}>
-        <h1 className={style.h1}>Нет доступных тестов</h1>
+        <div className={style.center}>{children}</div>
         <div className={`${style.light} ${style.x1}`} />
         <div className={`${style.light} ${style.x2}`}/>
         <div className={`${style.light} ${style.x3}`}/>
@@ -18,4 +18,4 @@ const WaitingPage = () => {
   )
 }
 
-export default WaitingPage;
+export default WaitingBackground;

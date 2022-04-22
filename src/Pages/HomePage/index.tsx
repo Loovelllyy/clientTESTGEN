@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import WaitingPage from "../WaitingPage";
+import WaitingBackground from "../../Components/WaitingBackground";
 import TestListPage from "../TestListPage";
 // import axios from "axios";
 
@@ -16,7 +16,7 @@ const HomePage = () => {
     }, [])
 
     if (data1) return <TestListPage />
-    else return <WaitingPage />
+    else return <WaitingBackground children={<h1>Нет доступных тестов</h1>}/>
 }
 
 export default HomePage;

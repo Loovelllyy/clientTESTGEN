@@ -4,9 +4,8 @@ import {Link} from "react-router-dom";
 import {css} from "@emotion/react";
 
 import Logo from '~media/logo.png'
-import { btnStyle } from '../../../public/style'
 
-const Start = () => {
+const StartPage = () => {
 
     const style = css`
         display: flex;
@@ -42,13 +41,13 @@ const Start = () => {
                     <img src={Logo} alt='Logo' css={css` height: 100%; width: 100% `} />
                 </div>
                 <Link to='/logIn' style={{ textDecorationLine: 'none', alignItems: 'center' }} >
-                    <Button variant='outlined' sx={ btnStyle } >Я преподаватель</Button>
+                    <Button variant='outlined' >Я преподаватель</Button>
                 </Link>
-                <Link to='/home' style={{ textDecorationLine: 'none' }}>
-                    <Button variant='outlined' sx={ btnStyle }>Я студент</Button>
+                <Link to='/testListPage' style={{ textDecorationLine: 'none' }}>
+                    <Button variant='outlined'>Я студент</Button>
                 </Link>
             </Box>
     )
 }
 
-export default Start;
+export default StartPage;

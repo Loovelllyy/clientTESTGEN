@@ -10,10 +10,11 @@ export const wrapper = css`
 `;
 
 export const style = css`
+  background: rgba(146, 162, 157, 0.45);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100%;
+  //height: 100%;
   max-width: 1200px;
   padding: 50px;
   box-sizing: border-box;

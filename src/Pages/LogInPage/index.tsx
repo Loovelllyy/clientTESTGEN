@@ -1,7 +1,12 @@
 import React from "react";
+import WaitingBackground from "../../Components/WaitingBackground";
+import SignUp from "../../Components/Singup";
+
 
 const LogIn = () => {
-    return <p>LogIn</p>
+    return (
+        <WaitingBackground children={<SignUp />} />
+    )
 }
 
-export default LogIn
+export default LogIn;

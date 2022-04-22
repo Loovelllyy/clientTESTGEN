@@ -1,13 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 import { css } from "@emotion/react";
 import { AiFillFileText } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 
 
-const Test = ({id, nameTest}: {id: number, nameTest: string}) => {
-
-    // const [id, idSet] = useState<number>(1)
+const Test = ({id, nameTest, admin = false}: {id: number, nameTest: string, admin?: boolean}) => {
 
     const wrapperStyle = css`
         height: 15%;
@@ -30,9 +28,19 @@ const Test = ({id, nameTest}: {id: number, nameTest: string}) => {
         height: 100%;
     `;
 
-    return (
-        <Link to={`/question/${id}`} css={css` text-decoration: none; color: var(--mainColorText)`}>
-            <div css={ wrapperStyle }>
+    if (admin) {
+        console.log(admin)
+        return(
+            <div css={ wrapperStyle } >
+                <AiFillFileText css={ itemStyle } />
+                <p>{nameTest}</p>
+            </div>)
+    }
+
+    else return (
+        <Link  to={`/question/${id}`} css={css` text-decoration: none; color: var(--mainColorText)`}>
+            {console.log(admin)}
+            <div css={ wrapperStyle } >
                 <AiFillFileText css={ itemStyle } />
                 <p>{nameTest}</p>
             </div>

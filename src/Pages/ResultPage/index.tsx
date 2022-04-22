@@ -4,7 +4,6 @@ import ResultList from "../../Components/ResultList";
 import { css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 import {Button} from "@mui/material";
-import {btnStyle} from "../../../public/style";
 
 export interface IData {
 	correct: number,
@@ -28,12 +27,12 @@ function ResultPage() {
 			<h1 css={css`text-align: center; margin: 0`} >Тест завершён!</h1>
 			<ResultList data={data}/>
 			<Link to='/home' style={{ textDecorationLine: 'none' }}>
-				<Button variant='outlined' sx={ btnStyle }>Назад к тестам</Button>
+				<Button variant='outlined' >Назад к тестам</Button>
 			</Link>
 		</div>
 	)
 }
 
-const WrappedComponent = withLoader(ResultPage, '')
+const WrappedComponent = withLoader(ResultPage)
 
 export default WrappedComponent;

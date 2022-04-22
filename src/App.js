@@ -1,28 +1,46 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { ThemeProvider, createTheme } from '@mui/material';
 
-import Start from "./Pages/StartPage";
+import StartPage from "./Pages/StartPage";
 import LogIn from "./Pages/LogInPage";
-import HomePage from "./Pages/HomePage";
 import NotFoundPage from './Pages/NotFoundPage'
 import QuestionPage from "./Pages/QuestionPage";
 import Loader from "./Components/Loader";
-import AnswerPage from "./Pages/ResultPage";
+import ResultPage from "./Pages/ResultPage";
+import AdminPage from "./Pages/AdminPage";
+import TestListPage from "./Pages/TestListPage";
 
+const myTheme = createTheme({
+	palette: {
+		primary: {
+			main: 'rgba(255, 255, 255, 0.63)',
+			light: 'rgb(255,255,255)',
+			dark: 'rgba(154,154,154,0.63)',
+			contrastText: '#3E514A'
+		}
+}
+})
 
 function App() {
+
+
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path='*' element={ <NotFoundPage/> }/>
-				<Route path='/' element={<Start/>}/>
-				<Route path='/logIn' element={<LogIn/>}/>
-				<Route path='/home' element={<HomePage/>}/>
-				<Route path={`/question/${1}`} element={<QuestionPage/>}/>
-				<Route path='/test' element={<Loader/>}/>
-				<Route path='/result' element={<AnswerPage/>}/>
-			</Routes>
-		</BrowserRouter>
+		<ThemeProvider theme={myTheme}>
+			<BrowserRouter>
+				<Routes>
+					<Route path='*' element={ <NotFoundPage/> }/>
+					<Route path='/' element={<StartPage/>}/>
+					<Route path='/logIn' element={<LogIn/>}/>
+					<Route path='/test' element={<Loader/>}/>
+					<Route path='/result' element={<ResultPage/>}/>
+					<Route path='/testListPage' element={<TestListPage/>}/>
+					<Route path={`/question/:id`} element={<QuestionPage/>}/>
+					<Route path={`/adminPanel`} element={<AdminPage />}/>
+				</Routes>
+			</BrowserRouter>
+		</ThemeProvider>
+
 	);
 }
 

@@ -6,3 +6,13 @@ html, body, #root {
     font: 1.3em 'Droid Sans Mono', serif;
     overflow-y: hidden;
 }
+
+.wrapperStyle {
+    background: var(--bgMainColor);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}

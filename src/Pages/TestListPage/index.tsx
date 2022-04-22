@@ -1,26 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TestList from '../../Components/TestList';
-import {css} from "@emotion/react"
+import withLoader from "../../HOC/withLoader";
+import { wrapperStyle } from "../../../public/style";
+import {Button} from "@mui/material";
+import axios from "axios";
+
+interface ITest {
+	id: number,
+	nameTest: string,
+}
+
+interface IProps {
+	data: ITest[],
+	admin: boolean,
+}
 
 const TestListPage = () => {
 
-	const wrapperStyle = css`
-		background: var(--bgMainColor);
-	  	display: flex;
-	  	flex-direction: column;
-	  	align-items: center;
-	  	justify-content: center;
-	  	height: 100%;
-	  	width: 100%;
-	`;
+	const [data, setData] = useState([]);
+	const [admin, setAdmin] = useState(false);
+
+
+	useEffect(() => {
+		axios.get('http://localhost:3030/getTests').then((d: { data: IProps }) => {
+			console.log(d);
+			setData(d.data.data);
+			setAdmin(d.data.admin)
+		} )
+	}, [])
 
 	return (
 		<div css={ wrapperStyle }>
-			<h1>Выберите нужный тест</h1>
-			<TestList/>
+			{admin? <h2>Доступные тесты</h2> : < h1 > Выберите нужный тест</h1>}
+			{admin? <Button > Выйти </Button> : null}
+			<TestList data={data} admin={admin} />
 		</div>
 	);
 };
 
-export default TestListPage;
+const WrappedPage = withLoader(TestListPage)
+
+export default WrappedPage;
 

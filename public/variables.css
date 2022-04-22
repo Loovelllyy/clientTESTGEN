@@ -7,4 +7,8 @@
     --bgTotal: #c7d7cd;
     --bgCorrect: #4ED45B;
     --bgIncorrect: #FD5967;
+
+    --colorInputText: rgba(255, 255, 255, 0.63);
+
+    --borderRadius: 3px;
 }

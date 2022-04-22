@@ -2,7 +2,17 @@ import React from "react";
 import Test from "../Test";
 import {css} from "@emotion/react"
 
-const TestList = () => {
+interface ITest {
+	id: number,
+	nameTest: string,
+}
+
+interface IProps {
+	data: ITest[],
+	admin: boolean
+}
+
+const TestList = ({data, admin}: IProps) => {
 
 	const styleWrapper = css`
       	background: var(--bgList);
@@ -27,8 +37,9 @@ const TestList = () => {
 
 	return (
 		<div css={ styleWrapper }>
-			<Test key={1} id={1} nameTest='11111'/>
-			<Test key={0} id={0} nameTest='0000000'/>
+			{data.map(el => <Test key={el.id} nameTest={el.nameTest} id={el.id} />)}
+			{/*<Test key={1} id={} nameTest='11111' admin={admin}/>*/}
+			{/*<Test key={0} id={0} nameTest='0000000' admin={admin}/>*/}
 		</div>
 	)
 }

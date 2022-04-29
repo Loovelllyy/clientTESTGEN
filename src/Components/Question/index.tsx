@@ -14,7 +14,6 @@ interface IProps {
 	answersVar: string[]
 }
 
-
 export const s = css`
   display: block;
   box-sizing: border-box;
@@ -24,7 +23,7 @@ export const s = css`
   border-radius: var(--borderRadius);
 `
 
-const Question = ({data}: { data: IProps[] }) => {
+const Question = (data: IProps[] ) => {
 
 	const [isDone, isDoneSet] = useState(false);
 	const [checkedAnswer, checkedAnswerSet] = useState('');

@@ -1,19 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {css} from "@emotion/react";
 import {Button, TextField } from "@mui/material";
 import axios from "axios";
-import {Route, useNavigate, useParams} from "react-router-dom";
+import {Navigate, Route, useNavigate, useParams} from "react-router-dom";
+import {PATHclient, PATHreq} from "../../URLs";
 
 axios.defaults.withCredentials = true
 
 function SignUp() {
 	const nav = useNavigate();
+	const toHome = useNavigate();
 
 	const signUp = (data: {login: string, password: string}) => {
 
-		axios.post('http://localhost:3030/signIn', data, {headers: { 'Authorization':  `Basic slfklsdkflksd`}})
+		axios.post(`${PATHreq.auth}`, data)
 			.then((d) => {
 				if(d.data === 'OK') nav('/testListPage')
 				else alert('Error sing in')
@@ -21,7 +23,6 @@ function SignUp() {
 			.catch(e => {
 				alert('Что-то пошло не так')
 			})
-			// .then(d => console.log(d))
 	}
 
 	const SignupSchema = Yup.object({
@@ -41,9 +42,14 @@ function SignUp() {
 		validationSchema: SignupSchema,
 		onSubmit: (values) => {
 			signUp(values);
-			console.log(JSON.stringify(values, null, 2));
 		},
 	});
+
+	useEffect(() => {
+		axios.get(PATHreq.checkedCookie).then(d => {
+			if (d.data) toHome(PATHclient.HomePage);
+		})
+	}, [])
 
 	return (
 		<div>

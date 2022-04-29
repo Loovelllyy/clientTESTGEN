@@ -8,7 +8,6 @@ import NotFoundPage from './Pages/NotFoundPage'
 import QuestionPage from "./Pages/QuestionPage";
 import Loader from "./Components/Loader";
 import ResultPage from "./Pages/ResultPage";
-import AdminPage from "./Pages/AdminPage";
 import TestListPage from "./Pages/TestListPage";
 
 const myTheme = createTheme({
@@ -18,6 +17,12 @@ const myTheme = createTheme({
 			light: 'rgb(255,255,255)',
 			dark: 'rgba(154,154,154,0.63)',
 			contrastText: '#3E514A'
+		},
+		secondary: {
+			main: '#3E514A',
+			light: '#94b7ac',
+			dark: '#2c3f35',
+			contrastText: '#868686'
 		}
 }
 })
@@ -36,7 +41,6 @@ function App() {
 					<Route path='/result' element={<ResultPage/>}/>
 					<Route path='/testListPage' element={<TestListPage/>}/>
 					<Route path={`/question/:id`} element={<QuestionPage/>}/>
-					<Route path={`/adminPanel`} element={<AdminPage />}/>
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>

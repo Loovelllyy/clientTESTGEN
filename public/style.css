@@ -16,3 +16,7 @@ html, body, #root {
     height: 100%;
     width: 100%;
 }
+
+input {
+    color: #2e4f47;
+}

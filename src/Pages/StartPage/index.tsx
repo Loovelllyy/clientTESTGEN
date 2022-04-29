@@ -1,11 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Box } from "@mui/material";
-import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {css} from "@emotion/react";
 
 import Logo from '~media/logo.png'
+import axios from "axios";
+import {PATHreq, PATHclient} from "../../URLs";
 
 const StartPage = () => {
+
+    const goLink = useNavigate();
+
+    const [isAdminLink, setIsAdminLink] = useState(PATHclient.LogInPage);
+    const [student, setStudent] = useState(true)
+
+    const goLogin = () => {
+        goLink(isAdminLink)
+    }
+    const goTestList = () => {
+        goLink(PATHclient.TestListPage)
+    }
+    useEffect(() => {
+        axios.get(`${PATHreq.checkedCookie}`, {}).then(d => {
+            if(d.data) {
+                console.log('true');
+                setStudent(false);
+                setIsAdminLink(PATHclient.TestListPage);
+            }
+            else console.log('false');
+        })
+    }, [])
 
     const style = css`
         display: flex;
@@ -40,12 +64,8 @@ const StartPage = () => {
                 <div css={logo}>
                     <img src={Logo} alt='Logo' css={css` height: 100%; width: 100% `} />
                 </div>
-                <Link to='/logIn' style={{ textDecorationLine: 'none', alignItems: 'center' }} >
-                    <Button variant='outlined' >Я преподаватель</Button>
-                </Link>
-                <Link to='/testListPage' style={{ textDecorationLine: 'none' }}>
-                    <Button variant='outlined'>Я студент</Button>
-                </Link>
+                <Button variant='outlined' onClick={goLogin}>Я преподаватель</Button>
+                {student? <Button variant='outlined' onClick={goTestList}>Я студент</Button> : null}
             </Box>
     )
 }

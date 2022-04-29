@@ -37,9 +37,7 @@ const TestList = ({data, admin}: IProps) => {
 
 	return (
 		<div css={ styleWrapper }>
-			{data.map(el => <Test key={el.id} nameTest={el.nameTest} id={el.id} />)}
-			{/*<Test key={1} id={} nameTest='11111' admin={admin}/>*/}
-			{/*<Test key={0} id={0} nameTest='0000000' admin={admin}/>*/}
+			{data.map(el => <Test key={el.id} nameTest={el.nameTest} id={el.id} admin={admin} />)}
 		</div>
 	)
 }

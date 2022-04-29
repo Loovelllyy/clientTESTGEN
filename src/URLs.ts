@@ -1,16 +1,21 @@
-const PORT = 3000;
+const PORT = 3030;
 
-export const HOST = `localhost://localhost:${PORT}/`;
+export const HOST = `http://localhost:${PORT}/`;
 
 export const PATHreq = {
-	authorization: '',
+	auth: `${HOST}auth`,
+	checkedCookie: `${HOST}checkedCookie`,
+	getTests: `${HOST}getTests`,
+	deleteCookie: `${HOST}deleteCookie`,
+	deleteTest: `${HOST}deleteTest`,
+	saveTest: `${HOST}saveTest`,
 }
 
 export const PATHclient = {
 	AdminPage: '/adminPanel',
-	HomePage: '/home',
+	HomePage: '/',
 	LogInPage: '/logIn',
 	QuestionPage: '`/question/:id`',
 	ResultPage: '/result',
-	TestListPage: '',
+	TestListPage: '/testListPage',
 }

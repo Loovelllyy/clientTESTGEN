@@ -6,7 +6,11 @@ import axios from "axios";
 import {PATHclient, PATHreq} from "../../../URLs";
 import {css} from "@emotion/react";
 
-function ExitPopUp({exit}: {exit: () => void}) {
+interface IProps {
+	exit: () => void
+}
+
+function ExitPopUp({exit}: IProps) {
 
 	const goHome = useNavigate();
 

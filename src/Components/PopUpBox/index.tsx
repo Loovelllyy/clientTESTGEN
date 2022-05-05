@@ -1,15 +1,15 @@
 import React from 'react';
 import style from './style.module.css'
-// import ExitPopUp from "../PopUps/ExitPopUp";
 import LoadPopUp from "../PopUps/LoadPopUp";
 import ExitPopUp from "../PopUps/ExitPopUp";
 
 interface IProps {
 	type: 'exit' | 'load' | '',
 	exit: () => void;
+	isUpdate: () => void;
 }
 
-function PopUpBox({exit, type}: IProps) {
+function PopUpBox({exit, type, isUpdate}: IProps) {
 
 	if (type === 'exit') {
 		return (
@@ -24,7 +24,7 @@ function PopUpBox({exit, type}: IProps) {
 		return (
 			<div className={style.wrapper}>
 				<div className={style.box}>
-					<LoadPopUp exit={exit}/>
+					<LoadPopUp exit={exit} isUpdate={isUpdate}/>
 				</div>
 			</div>
 		)

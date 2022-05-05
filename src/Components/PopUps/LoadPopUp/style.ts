@@ -3,7 +3,7 @@ import {css} from "@emotion/react";
 export const wrapper = css`
   display: flex;
   align-items: center; 
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-size: 1.2rem;
   max-height: 300px;
   width: 100%;

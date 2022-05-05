@@ -23,11 +23,9 @@ const StartPage = () => {
     useEffect(() => {
         axios.get(`${PATHreq.checkedCookie}`, {}).then(d => {
             if(d.data) {
-                console.log('true');
                 setStudent(false);
                 setIsAdminLink(PATHclient.TestListPage);
             }
-            else console.log('false');
         })
     }, [])
 

@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { css } from "@emotion/react";
 import {AiFillFileText, AiTwotoneDelete, AiTwotoneEdit} from "react-icons/ai";
-import { Link } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Button} from "@mui/material";
 import axios from "axios";
 import {PATHreq} from "../../URLs";
@@ -9,10 +9,13 @@ import {PATHreq} from "../../URLs";
 interface IProps {
     id: number,
     nameTest: string,
-    admin?: boolean
+    isUpdate: () => void
+    admin?: boolean,
 }
 
-const Test = ({id, nameTest, admin = false}: IProps) => {
+const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
+
+    const { curId } = useParams()
 
     const wrapperStyle = css`
         display: flex;
@@ -29,13 +32,8 @@ const Test = ({id, nameTest, admin = false}: IProps) => {
     `;
 
     const deleteTest = () => {
-        console.log('del')
-        axios.delete(PATHreq.deleteTest)
+        axios.delete(`${PATHreq.deleteTest}?id=${id}`).then(() => isUpdate())
     }
-
-    // const changeTest = () => {
-    //     console.log('change');
-    // }
 
     if (admin) {
         return(
@@ -47,15 +45,12 @@ const Test = ({id, nameTest, admin = false}: IProps) => {
             </div>)
     }
 
-
-
     return (
-        <Link  to={`/question/${id}`} css={css` text-decoration: none; color: var(--mainColorText)`}>
+
             <div css={ wrapperStyle }>
                 <AiFillFileText css={css`height: 50px; width: 50px`} />
                 <p>{nameTest}</p>
             </div>
-        </Link>
     )
 }
 

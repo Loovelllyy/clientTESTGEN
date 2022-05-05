@@ -79,6 +79,7 @@ function SignUp() {
 					onChange={formik.handleChange}
 					error={formik.touched.password && Boolean(formik.errors.password)}
 					helperText={formik.touched.password && formik.errors.password}
+					autoComplete='on'
 				/>
 				<Button variant='outlined' type="submit">
 					Войти

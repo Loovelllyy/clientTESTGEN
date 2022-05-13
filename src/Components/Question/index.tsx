@@ -1,17 +1,25 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FormLabel, RadioGroup, Button} from "@mui/material";
 import {Form, Formik} from "formik";
 import AnswerVar from "../AnswerVar";
 import {css} from "@emotion/react"
-import withLoader from "../../HOC/withLoader";
-import {Link} from "react-router-dom";
-
+import {useNavigate} from "react-router-dom";
 
 import {style, wrapperStyle, linkStyle, wrapper} from './styles'
+import axios from "axios";
+import {PATHclient, PATHreq} from "../../URLs";
+
 
 interface IProps {
-	quest: string;
-	answersVar: string[]
+	id: string
+}
+interface IDataVal {
+	question: string;
+	answer: string[];
+	correct?: string;
+}
+interface IData {
+	data: IDataVal[]
 }
 
 export const s = css`
@@ -23,27 +31,33 @@ export const s = css`
   border-radius: var(--borderRadius);
 `
 
-const Question = (data: IProps[] ) => {
+const Question = ({id}: IProps) => {
 
 	const [isDone, isDoneSet] = useState(false);
 	const [checkedAnswer, checkedAnswerSet] = useState('');
-
 	const [counter, counterSet] = useState(1);
+	const [currentData, currentDataSet] = useState<IDataVal>();
+	const [data, setData] = useState<IDataVal[]>();
+	const toRes = useNavigate();
 
-	const [currentData, currentDataSet] = useState<IProps>(data[0]);
+	const getData = async () => {
+		axios.get(`${PATHreq.getTestById}?id=${id}`).then(({data}: { data: IData }) => {
+			setData(data.data);
+			currentDataSet(data.data[0]);
+		})
+	}
 
+	useEffect(() => {
+		// console.log()
+		getData() //.then(() => currentDataSet(data[0]));
+	}, []);
 
-	const setArr = (arr: string[], item: string) => {
-		arr.push(item);
+	const setArr = (arr: any[], item: string) => {
+		arr.push(item[0]);
 		let newArr = arr.filter((i) => {
 			return i
 		})
 		console.log(newArr);
-	}
-
-	const arrClean = (arr: string[]) => {
-		console.log('answers is submit', arr);
-		arr.length = 0;
 	}
 
 	// TODO add checking on submit button, add func submit
@@ -51,17 +65,17 @@ const Question = (data: IProps[] ) => {
 	const clickNext = (values: { answers: string[] }) => {
 		if (!checkedAnswer) {
 			alert('Выберите вариант ответа!');
-			return;
+			return false;
+		} else {
+			setArr(values.answers, checkedAnswer);
+			currentDataSet(data[counter]);
+			counterSet(prevState => prevState + 1);
+			if (counter === data.length - 1) {
+				isDoneSet(true)
+			}
+			checkedAnswerSet('');
 		}
-
-		setArr(values.answers, checkedAnswer);
-		currentDataSet(data[counter]);
-		counterSet(prevState => prevState + 1);
-		if (counter === data.length - 1) {
-			isDoneSet(true)
-		}
-
-		checkedAnswerSet('');
+		console.log(counter, data.length)
 	}
 
 	return (
@@ -72,34 +86,35 @@ const Question = (data: IProps[] ) => {
 					initialValues={{
 						answers: [],
 					}}
-					onSubmit={async (values) => {
-						await new Promise((r) => setTimeout(r, 500));
+					onSubmit={(values) => {
 						console.log(values);
+						axios.post(PATHreq.postAnswer, {values, id});
+						toRes(PATHclient.ResultPage + '/' + id);
 					}}
 				>
 					{({values}) => (
 						<Form>
+							<FormLabel id="demo-row-radio-buttons-group-label"
+									   css={ css`display: block;
+                                         margin-bottom: 30px;
+                                         color: #ffffff` }>{currentData?.question}
+							</FormLabel>
+
 							<RadioGroup css={wrapperStyle} row aria-labelledby="demo-row-radio-buttons-group-label"
 										name="row-radio-buttons-group" onChange={(e) => {
-								checkedAnswerSet(e.target.value)
+								checkedAnswerSet(e.target.value);
 							}}>
-								<FormLabel id="demo-row-radio-buttons-group-label"
-										   css={s}>{currentData.quest}</FormLabel>
+
 								{
-									currentData?.answersVar.map((el => {
+									currentData?.answer.map((el => {
 										return <AnswerVar key={el} valAnswer={el} answerVar={el}/>
 									}))
 								}
 								{isDone ?
-									<Link to='/result' css={linkStyle}>
-										<Button variant="outlined" type="submit" onClick={() => {
-											arrClean(values.answers)
-										}}>Узнать результат</Button>
-									</Link>
+									<Button variant="outlined" type="submit" onClick={() => clickNext(values)}>Узнать результат</Button>
 									:
 									<div css={linkStyle}>
-										<Button variant="outlined" type="button" onClick={() => clickNext(values)}>К
-											следующему вопросу</Button>
+										<Button variant="outlined" onClick={() => clickNext(values)}>К следующему вопросу</Button>
 									</div>
 								}
 							</RadioGroup>
@@ -110,6 +125,8 @@ const Question = (data: IProps[] ) => {
 		</div>)
 }
 
-const WrappedComponent = withLoader(Question);
+// const WrappedComponent = withLoader(Question);
 
-export default WrappedComponent;
+
+
+export default Question;

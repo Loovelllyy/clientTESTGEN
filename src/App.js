@@ -34,14 +34,13 @@ function App() {
 		<ThemeProvider theme={myTheme}>
 			<BrowserRouter>
 				<Routes>
-					{/*<Route path='*' element={ <NotFoundPage/> }/>*/}
+					<Route path='*' element={ <NotFoundPage/> }/>
 					<Route path='/' element={<StartPage/>}/>
 					<Route path='/logIn' element={<LogIn/>}/>
 					<Route path='/test' element={<Loader/>}/>
-					<Route path='/result' element={<ResultPage/>}/>
+					<Route path='/result/:id' element={<ResultPage/>}/>
 					<Route path='/testListPage' element={<TestListPage/>}/>
 					<Route path={`/question/:id`} element={<QuestionPage/>}/>
-					{/*<Route path={`/question/d6f9c9d5-ae6c-4474-afac-496d2bf48040`} element={<h1>QUESTION</h1>}/>*/}
 				</Routes>
 			</BrowserRouter>
 		</ThemeProvider>

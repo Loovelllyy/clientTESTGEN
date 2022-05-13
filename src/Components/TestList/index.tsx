@@ -40,9 +40,8 @@ const TestList = ({data, admin, isUpdate}: IProps) => {
 	return (
 		<div css={ styleWrapper }>
 			{data.map(el =>
-				<Link to={`/question/${el.id}`} css={css` text-decoration: none; color: var(--mainColorText)`}>
 					<Test key={el.id} nameTest={el.nameTest} id={el.id} admin={admin} isUpdate={isUpdate}/>
-				</Link>
+				// </Link>
 			)}
 		</div>
 	)

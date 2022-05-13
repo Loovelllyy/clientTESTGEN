@@ -1,34 +1,57 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import withLoader from "../../HOC/withLoader";
 import ResultList from "../../Components/ResultList";
-import { css } from '@emotion/react';
-import { Link } from 'react-router-dom';
+import {css} from '@emotion/react';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import {Button} from "@mui/material";
+import {PATHclient, PATHreq} from "../../URLs";
+import axios from "axios";
 
 export interface IData {
 	correct: number,
 	incorrect: number,
 }
+const ids: string[] = []
 
 function ResultPage() {
 
-	let data: IData = { correct: 25, incorrect: 15 } // from props
+	const nav = useNavigate();
 
-	return(
+	let [data, dataSet] = useState<{ correct: number, incorrect: number }>({correct: 0, incorrect: 0})// { correct: 25, incorrect: 15 } // from props
+	// const [isLoad, setIsLode] = useState<Boolean>(false)
+
+	let {id} = useParams<string>();
+
+
+	useEffect(() => {
+		axios.get(PATHreq.getTests).then(d => {
+			d.data.data.map((el: {id: string}) => {
+				ids.push(el.id)
+			})
+		}).then(() => {
+			if(ids.findIndex((i) => i == id) == -1) {
+				nav('/not-found');
+			}
+		})
+	}, []);
+
+
+	return (
 		<div css={css`
-			width: 100%;
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: space-evenly;
-			background: var(--bgList);
-		`}>
-			<h1 css={css`text-align: center; margin: 0`} >Тест завершён!</h1>
-			<ResultList data={data}/>
-			<Link to='/home' style={{ textDecorationLine: 'none' }}>
-				<Button variant='outlined' >Назад к тестам</Button>
-			</Link>
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-evenly;
+          background: var(--bgList); `}>
+			<h1 css={css`text-align: center;
+              margin: 0`}>Тест завершён!</h1>
+			<ResultList id={id} />
+			<div css={css`display: flex; width: 50%; align-items: center; justify-content: space-evenly`}>
+				<Button variant='outlined' color='secondary' onClick={() => nav(PATHclient.TestListPage)}>Назад к тестам</Button>
+				<Button variant='outlined' color='secondary' onClick={() => nav(PATHclient.HomePage)}> На главную </Button>
+			</div>
 		</div>
 	)
 }

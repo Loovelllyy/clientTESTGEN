@@ -15,8 +15,6 @@ interface IProps {
 
 const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
 
-    const { curId } = useParams()
-
     const wrapperStyle = css`
         display: flex;
         align-items: center;
@@ -40,17 +38,19 @@ const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
             <div css={ wrapperStyle } >
                 <AiFillFileText css={css`height: 50px; width: 50px`} />
                 <p>{nameTest}</p>
-                <Button css={css`margin-left: auto; border: 1px solid #3E514A`} onClick={ deleteTest }><AiTwotoneDelete color='var(--mainColorText)' css={css`height: 30px; width: 30px`}/></Button>
-                {/*<Button  onClick={ changeTest }><AiTwotoneEdit color='var(--mainColorText)' css={css`height: 30px; width: 30px`}  /></Button>*/}
+                <Button css={css`margin-left: auto; border: 1px solid #3E514A; height: 30px; width: 30px`} onClick={ deleteTest }>
+                    <AiTwotoneDelete color='var(--mainColorText)' />
+                </Button>
             </div>)
     }
 
     return (
-
+        <Link to={`/question/${id}`} css={css` text-decoration: none; color: var(--mainColorText)`}>
             <div css={ wrapperStyle }>
                 <AiFillFileText css={css`height: 50px; width: 50px`} />
                 <p>{nameTest}</p>
             </div>
+        </Link>
     )
 }
 

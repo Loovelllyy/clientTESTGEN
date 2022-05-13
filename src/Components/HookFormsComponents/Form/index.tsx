@@ -27,8 +27,10 @@ const Form = ({exit, isUpdate}: IProps) => {
 		let reader = new FileReader();
 		reader.readAsText(inpFile[0]);
 		reader.onload = () => {
-			let res = parseFunc(reader.result.toString());
-			axios.post(`${PATHreq.saveTest}`, {nameTest, qw: res}).then(d => d);
+			console.log(reader.result)
+			let [qw, correct] = parseFunc(reader.result.toString());
+			console.log({nameTest, qw, correct})
+			axios.post(`${PATHreq.saveTest}`, {nameTest, qw, correct}).then(d => d);
 			isUpdate();
 			exit()
 

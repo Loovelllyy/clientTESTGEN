@@ -9,6 +9,9 @@ export const PATHreq = {
 	deleteCookie: `${HOST}deleteCookie`,
 	deleteTest: `${HOST}deleteTest`,
 	saveTest: `${HOST}saveTest`,
+	getTestById: `${HOST}getTestById`,
+	postAnswer: `${HOST}postAnswer`,
+	getCorrect: `${HOST}getCorrect`
 }
 
 export const PATHclient = {

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {PATHreq} from "../../URLs";
+import {PATHclient, PATHreq} from "../../URLs";
 
 import {Button} from "@mui/material";
 import {wrapperStyle} from "../../../public/style";
@@ -9,6 +9,7 @@ import {css} from "@emotion/react";
 import withLoader from "../../HOC/withLoader";
 import TestList from '../../Components/TestList';
 import PopUpBox from "../../Components/PopUpBox";
+import {useNavigate} from "react-router-dom";
 
 
 interface ITest {
@@ -30,6 +31,8 @@ const TestListPage = () => {
 
 	const [isLoad, setIsLoad] = useState(false);
 
+	const nav = useNavigate();
+
 	const getTest = async () => {
 		axios.get(PATHreq.getTests).then(({data}: { data: IProps }) => {
 			setData(data.data);
@@ -38,7 +41,10 @@ const TestListPage = () => {
 	}
 
 	useEffect(() => {
-		getTest();
+		console.log('useEffect');
+		getTest().then(() => {
+			console.log(data)
+		});
 	}, []);
 
 	const logOf = () => {
@@ -75,7 +81,9 @@ const TestListPage = () => {
 			{admin ? <h2>Доступные тесты</h2> : < h1> Выберите нужный тест</h1>}
 			<TestList data={data} admin={admin} isUpdate={updateTest}/>
 			{admin ? <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}}
-							 onClick={logOf}> Выйти </Button> : null}
+							 onClick={logOf}> Выйти </Button> : <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}}
+																		onClick={() => nav(PATHclient.HomePage)}> На главную </Button>
+			}
 			{isPopUp ? <PopUpBox exit={exitPopUp} isUpdate={updateTest} type={popUpType}/> : null}
 		</div>
 	);

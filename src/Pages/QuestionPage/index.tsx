@@ -1,37 +1,41 @@
 import Question from "../../Components/Question";
-import {useParams, Navigate} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {PATHreq} from "../../URLs";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 // interface IProps {
 //
+// }
+// interface IDataFromServer {
+// 	quest: string;
+// 	answersVar: string[]
 // }
 
 const ids: string[] = []
 
 const QuestionPage = () => {
 
-	let { id } = useParams();
+	let { id } = useParams<string>();
+	let nav = useNavigate()
 
+	// const [data, setData] = useState<IDataFromServer[]>();
 
 	useEffect(() => {
 		axios.get(PATHreq.getTests).then(d => {
-			d.data.map((el: {id: string}) => ids.push(el.id));
+			d.data.data.map((el: {id: string}) => {
+				ids.push(el.id)
+			})
+		}).then(() => {
 			if(ids.findIndex((i) => i == id) == -1) {
-				return <Navigate to='/not-found' replace />
+				nav('/not-found');
 			}
 		})
-
 	}, []);
-
-
-	// @ts-ignore
-
-
+	
 	return (
 		<>
-			<Question />
+			<Question id={id}/>
 		</>
 	)
 

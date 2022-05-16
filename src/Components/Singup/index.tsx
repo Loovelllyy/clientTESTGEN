@@ -2,27 +2,25 @@ import React, {useEffect} from 'react';
 import * as Yup from "yup";
 import {useFormik} from "formik";
 import {css} from "@emotion/react";
-import {Button, TextField } from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import axios from "axios";
-import {Navigate, Route, useNavigate, useParams} from "react-router-dom";
-import {PATHclient, PATHreq} from "../../URLs";
+import {useNavigate} from "react-router-dom";
+import {PATHclient, PATHreq} from "../../Requests/URLs";
+import {checkAuth} from "../../Requests/requests";
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 function SignUp() {
 	const nav = useNavigate();
 	const toHome = useNavigate();
 
-	const signUp = (data: {login: string, password: string}) => {
-
-		axios.post(`${PATHreq.auth}`, data)
-			.then((d) => {
-				if(d.data === 'OK') nav('/testListPage')
-				else alert('Error sing in')
-			})
-			.catch(e => {
-				alert('Что-то пошло не так')
-			})
+	const signUp = (data: unknown) => {
+		checkAuth(data).then((d) => {
+			if (d.data === 'OK') nav('/testListPage');
+			else alert('Error sing in');
+		}).catch(() => {
+			alert('Что-то пошло не так');
+		})
 	}
 
 	const SignupSchema = Yup.object({
@@ -54,12 +52,12 @@ function SignUp() {
 	return (
 		<div>
 			<h1>Выполните вход</h1>
-			<form onSubmit={formik.handleSubmit}  css={css`
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				gap: 20px;
+			<form onSubmit={formik.handleSubmit} css={css`
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 20px;
 			`}>
 				<TextField
 					id="login"

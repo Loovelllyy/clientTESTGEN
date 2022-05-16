@@ -5,7 +5,7 @@ import {css} from "@emotion/react";
 
 import { IData } from '../../Pages/ResultPage'
 import axios from "axios";
-import {PATHreq} from "../../URLs";
+import {PATHreq} from "../../Requests/URLs";
 
 export interface IAllData extends IData {
 	percentage: number,
@@ -19,7 +19,6 @@ function ResultList({id}: {id: string}) {
 
 	const getCorrect = async () => {
 		axios.get(`${PATHreq.getCorrect}?id=${id}`).then(({data}: { data: { correct: number, incorrect: number } }) => {
-			console.log(data);
 			setData(data);
 			const total = {percentage: Math.round(data.correct / (data.correct + data?.incorrect) * 100)}
 			allDataSet(Object.assign({}, data, total))

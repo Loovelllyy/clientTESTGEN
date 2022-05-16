@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import {css} from "@emotion/react";
 
 import Logo from '~media/logo.png'
-import axios from "axios";
-import {PATHreq, PATHclient} from "../../URLs";
+import {PATHclient} from "../../Requests/URLs";
+import {checkedCookie} from "../../Requests/requests";
 
 const StartPage = () => {
 
@@ -21,7 +21,7 @@ const StartPage = () => {
         goLink(PATHclient.TestListPage)
     }
     useEffect(() => {
-        axios.get(`${PATHreq.checkedCookie}`, {}).then(d => {
+        checkedCookie().then(d => {
             if(d.data) {
                 setStudent(false);
                 setIsAdminLink(PATHclient.TestListPage);

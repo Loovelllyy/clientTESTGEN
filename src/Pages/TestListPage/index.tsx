@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import {PATHclient, PATHreq} from "../../URLs";
+import {PATHclient} from "../../Requests/URLs";
 
 import {Button} from "@mui/material";
 import {wrapperStyle} from "../../../public/style";
@@ -10,17 +9,7 @@ import withLoader from "../../HOC/withLoader";
 import TestList from '../../Components/TestList';
 import PopUpBox from "../../Components/PopUpBox";
 import {useNavigate} from "react-router-dom";
-
-
-interface ITest {
-	id: number,
-	nameTest: string,
-}
-
-interface IProps {
-	data: ITest[],
-	admin: boolean,
-}
+import {getTest} from "../../Requests/requests";
 
 const TestListPage = () => {
 
@@ -33,18 +22,15 @@ const TestListPage = () => {
 
 	const nav = useNavigate();
 
-	const getTest = async () => {
-		axios.get(PATHreq.getTests).then(({data}: { data: IProps }) => {
+	const getTestList = async () => {
+		getTest().then(data => {
 			setData(data.data);
 			setAdmin(data.admin);
 		})
 	}
 
 	useEffect(() => {
-		console.log('useEffect');
-		getTest().then(() => {
-			console.log(data)
-		});
+		getTestList()
 	}, []);
 
 	const logOf = () => {
@@ -58,7 +44,7 @@ const TestListPage = () => {
 
 	const updateTest = () => {
 		setIsLoad(true);
-		getTest().then(() => setIsLoad(false));
+		getTestList().then(() => setIsLoad(false));
 	}
 
 	const loadTest = () => {

@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { css } from "@emotion/react";
-import {AiFillFileText, AiTwotoneDelete, AiTwotoneEdit} from "react-icons/ai";
-import {Link, useParams} from "react-router-dom";
+import {AiFillFileText, AiTwotoneDelete} from "react-icons/ai";
+import {Link} from "react-router-dom";
 import {Button} from "@mui/material";
 import axios from "axios";
-import {PATHreq} from "../../URLs";
+import {PATHreq} from "../../Requests/URLs";
 
 interface IProps {
     id: number,

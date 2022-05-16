@@ -8,7 +8,7 @@ import {HiOutlineUpload} from "react-icons/hi";
 
 import {btn, icon, input, label, wrapper} from "../../PopUps/LoadPopUp/style";
 import {parseFunc} from "../../../hendlers/parserTextFile";
-import {PATHreq} from "../../../URLs";
+import {PATHreq} from "../../../Requests/URLs";
 
 interface IProps {
 	exit: () => void;
@@ -27,9 +27,7 @@ const Form = ({exit, isUpdate}: IProps) => {
 		let reader = new FileReader();
 		reader.readAsText(inpFile[0]);
 		reader.onload = () => {
-			console.log(reader.result)
 			let [qw, correct] = parseFunc(reader.result.toString());
-			console.log({nameTest, qw, correct})
 			axios.post(`${PATHreq.saveTest}`, {nameTest, qw, correct}).then(d => d);
 			isUpdate();
 			exit()
@@ -39,6 +37,7 @@ const Form = ({exit, isUpdate}: IProps) => {
 			console.log(reader.error);
 		};
 		reset();
+
 	}
 
 	return(
@@ -61,7 +60,7 @@ const Form = ({exit, isUpdate}: IProps) => {
 						   error={!!errors?.fileName}
 						   helperText={errors?.fileName ? errors?.fileName?.message : false}
 				/>
-				{watch('inpFile') && watch('inpFile')[0]?.name && <p css={css`color: black`}>{watch('inpFile')[0].name || <div></div>}</p>}
+				{watch('inpFile') && watch('inpFile')[0]?.name && <p css={css`color: black`}>{watch('inpFile')[0].name || <div />}</p>}
 			</div>
 
 			<div css={css`display: flex;

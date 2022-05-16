@@ -1,10 +1,9 @@
 import React from 'react';
-import style from "../../PopUpBox/style.module.css";
 import {Button} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
-import {PATHclient, PATHreq} from "../../../URLs";
+import {PATHclient} from "../../../Requests/URLs";
 import {css} from "@emotion/react";
+import {request} from "../../../Requests";
 
 interface IProps {
 	exit: () => void
@@ -15,7 +14,7 @@ function ExitPopUp({exit}: IProps) {
 	const goHome = useNavigate();
 
 	const exitAdmin = () => {
-		axios.get(PATHreq.deleteCookie).then(d => {
+		request('get', 'deleteCookie').then(() => {
 			goHome(PATHclient.HomePage);
 		})
 	}

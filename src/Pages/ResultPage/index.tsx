@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import withLoader from "../../HOC/withLoader";
 import ResultList from "../../Components/ResultList";
 import {css} from '@emotion/react';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import {Button} from "@mui/material";
-import {PATHclient, PATHreq} from "../../URLs";
+import {PATHclient, PATHreq} from "../../Requests/URLs";
 import axios from "axios";
 
 export interface IData {
@@ -16,9 +16,6 @@ const ids: string[] = []
 function ResultPage() {
 
 	const nav = useNavigate();
-
-	let [data, dataSet] = useState<{ correct: number, incorrect: number }>({correct: 0, incorrect: 0})// { correct: 25, incorrect: 15 } // from props
-	// const [isLoad, setIsLode] = useState<Boolean>(false)
 
 	let {id} = useParams<string>();
 

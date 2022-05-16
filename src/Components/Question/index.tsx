@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 import {style, wrapperStyle, linkStyle, wrapper} from './styles'
 import axios from "axios";
-import {PATHclient, PATHreq} from "../../URLs";
+import {PATHclient, PATHreq} from "../../Requests/URLs";
 
 
 interface IProps {
@@ -48,19 +48,12 @@ const Question = ({id}: IProps) => {
 	}
 
 	useEffect(() => {
-		// console.log()
-		getData() //.then(() => currentDataSet(data[0]));
+		getData()
 	}, []);
 
 	const setArr = (arr: any[], item: string) => {
 		arr.push(item[0]);
-		let newArr = arr.filter((i) => {
-			return i
-		})
-		console.log(newArr);
 	}
-
-	// TODO add checking on submit button, add func submit
 
 	const clickNext = (values: { answers: string[] }) => {
 		if (!checkedAnswer) {
@@ -75,7 +68,6 @@ const Question = ({id}: IProps) => {
 			}
 			checkedAnswerSet('');
 		}
-		console.log(counter, data.length)
 	}
 
 	return (
@@ -87,7 +79,6 @@ const Question = ({id}: IProps) => {
 						answers: [],
 					}}
 					onSubmit={(values) => {
-						console.log(values);
 						axios.post(PATHreq.postAnswer, {values, id});
 						toRes(PATHclient.ResultPage + '/' + id);
 					}}
@@ -124,9 +115,5 @@ const Question = ({id}: IProps) => {
 			</div>
 		</div>)
 }
-
-// const WrappedComponent = withLoader(Question);
-
-
 
 export default Question;

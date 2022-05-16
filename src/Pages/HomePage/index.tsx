@@ -6,13 +6,10 @@ import TestListPage from "../TestListPage";
 const HomePage = () => {
     let [data1, setData1] = useState(0);
 
-    // let data = 0;
-
     useEffect(() =>{
           setTimeout(()=> {
               setData1(1)
         }, 1000)
-        // data = axios.get('');
     }, [])
 
     if (data1) return <TestListPage />

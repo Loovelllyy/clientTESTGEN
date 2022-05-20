@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import * as d3 from "d3";
 import {css} from "@emotion/react";
 
@@ -15,11 +15,11 @@ function Diagram({data}: { data: IData }) {
 
 	let radius =  Math.min(width, height) / 2.5;
 
-	const divContainer = useRef()
+	const myData: IMyData[] = [{num: data.correct, color: 'var(--bgCorrect)'}, {num: data.incorrect, color: 'var(--bgIncorrect)'}];
+
+	const divContainer = useRef();
 
 	useEffect(() => {
-		const myData: IMyData[] = [{num: data.correct, color: 'var(--bgCorrect)'}, {num: data.incorrect, color: 'var(--bgIncorrect)'}];
-
 		d3.selectAll('svg').remove();
 
 		const container = d3.select(divContainer.current)
@@ -42,35 +42,35 @@ function Diagram({data}: { data: IData }) {
 			.style('width', '100%')
 			.attr("class", "donutArcSlices")
 			.attr("d", path)
-			.attr("fill", (d: { data: IMyData }) => d.data.color )
+			.attr("fill", (d: { data: IMyData }) => d.data.color );
 
 		// text on diagram
-			// .each(function(d: IData, i: number) {
-			// 	let firstArcSection = /(^.+?)L/;
-			// 	let newArc = firstArcSection.exec( d3.select(this).attr("d") )[0];
-			// 	newArc = newArc.replace(/,/g , " ");
-			// 	g.append("path")
-			// 		.attr("class", "hiddenDonutArcs")
-			// 		.attr("id", "donutArc"+i)
-			// 		.attr("d", newArc)
-			// 		.style("fill", "none");
-			// });
+		// .each(function(d: IData, i: number) {
+		// 	let firstArcSection = /(^.+?)L/;
+		// 	let newArc = firstArcSection.exec( d3.select(this).attr("d") )[0];
+		// 	newArc = newArc.replace(/,/g , " ");
+		// 	g.append("path")
+		// 		.attr("class", "hiddenDonutArcs")
+		// 		.attr("id", "donutArc"+i)
+		// 		.attr("d", newArc)
+		// 		.style("fill", "none");
+		// });
 		// g.selectAll(".donutText")
 		// 	.data(data)
-			// .enter().append("text")
-			// .attr("class", "donutText")
-			// .attr("dy", -13)
-			// .append("textPath")
-			// .attr("startOffset","50%")
-			// .style("text-anchor","middle")
-			// .attr("xlink:href",(d: IData, i: number) => "#donutArc" + i)
-			// .text((d: IData) => `${d.type}: ${d.num}`);
+		// .enter().append("text")
+		// .attr("class", "donutText")
+		// .attr("dy", -13)
+		// .append("textPath")
+		// .attr("startOffset","50%")
+		// .style("text-anchor","middle")
+		// .attr("xlink:href",(d: IData, i: number) => "#donutArc" + i)
+		// .text((d: IData) => `${d.type}: ${d.num}`);
 
-	}, [data]);
+
+	}, []);
 
 	return (
-		<div css={css`width: 300px; height: 300px; margin: 50px; & > svg { overflow: visible } `} ref={divContainer}>
-		</div>
+		<div css={css`width: 300px; height: 300px; margin: 50px; & > svg { overflow: visible } `} ref={divContainer} />
 	);
 }
 

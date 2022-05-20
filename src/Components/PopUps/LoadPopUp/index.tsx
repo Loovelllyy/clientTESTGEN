@@ -20,12 +20,9 @@ function LoadPopUp({exit, isUpdate}: IProps) {
           flex-direction: column;
           align-items: center;
           justify-content: space-around`}>
-			<p>Перетащите файл с тестом на это поле <br/> Помните, что информация в файле должна быть <abbr
-				title='sdvsdcf'>в соответствующем виде</abbr></p>
+			<p>Выберете файл, который хотите загрузить. Помните, что поддерживается только формат .txt с верным форматированием</p>
 			<Button color='secondary' onClick={exit} css={btnDel}><RiCloseFill css={icon}/></Button>
-
 			<Form exit={exit} isUpdate={isUpdate}/>
-
 		</div>
 	);
 }

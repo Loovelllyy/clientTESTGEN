@@ -31,7 +31,6 @@ const Form = ({exit, isUpdate}: IProps) => {
 			axios.post(`${PATHreq.saveTest}`, {nameTest, qw, correct}).then(d => d);
 			isUpdate();
 			exit()
-
 		}
 		reader.onerror = () => {
 			console.log(reader.error);
@@ -60,7 +59,7 @@ const Form = ({exit, isUpdate}: IProps) => {
 						   error={!!errors?.fileName}
 						   helperText={errors?.fileName ? errors?.fileName?.message : false}
 				/>
-				{watch('inpFile') && watch('inpFile')[0]?.name && <p css={css`color: black`}>{watch('inpFile')[0].name || <div />}</p>}
+				{ watch('inpFile') && watch('inpFile')[0]?.name && <p css={css`color: black`}>{watch('inpFile')[0].name || <div />}</p> }
 			</div>
 
 			<div css={css`display: flex;

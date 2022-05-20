@@ -10,6 +10,7 @@ import Loader from "./Components/Loader";
 import ResultPage from "./Pages/ResultPage";
 import TestListPage from "./Pages/TestListPage";
 
+
 const myTheme = createTheme({
 	palette: {
 		primary: {

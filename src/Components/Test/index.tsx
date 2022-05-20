@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "@emotion/react";
 import {AiFillFileText, AiTwotoneDelete} from "react-icons/ai";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
 import axios from "axios";
 import {PATHreq} from "../../Requests/URLs";
@@ -14,6 +14,8 @@ interface IProps {
 }
 
 const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
+
+    const nav = useNavigate();
 
     const wrapperStyle = css`
         display: flex;
@@ -45,12 +47,10 @@ const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
     }
 
     return (
-        <Link to={`/question/${id}`} css={css` text-decoration: none; color: var(--mainColorText)`}>
-            <div css={ wrapperStyle }>
+            <div css={ wrapperStyle } onClick={ () => nav(`/question/${id}`) }>
                 <AiFillFileText css={css`height: 50px; width: 50px`} />
                 <p>{nameTest}</p>
             </div>
-        </Link>
     )
 }
 

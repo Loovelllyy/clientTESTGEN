@@ -29,27 +29,7 @@ module.exports = {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env',
-                            "@babel/preset-react",  [
-                                "@emotion/babel-preset-css-prop",
-                                {
-                                    "autoLabel": "dev-only",
-                                    "labelFormat": "[local]",
-                                    "useBuiltIns": false,
-                                    "throwIfNamespace": true
-                                }
-                            ],
-                        ],
-                        plugins: ['@babel/plugin-proposal-class-properties',
-                            "transform-class-properties", "@emotion",
-                            ["@babel/plugin-transform-runtime",
-                                {
-                                    "regenerator": true
-                                }
-                            ]],
-                    }
+                    loader: 'babel-loader'
                 }
             },
             {
@@ -81,11 +61,6 @@ module.exports = {
                 ],
                 include: /\.module\.css$/,
             },
-            // {
-            //     client: /\.css$/,
-            //     use: ["style-loader", "css-loader"],
-            //     exclude: /\.module\.css$/,
-            // },
         ]
     },
 

@@ -23,9 +23,12 @@ export const style = css`
 
 export const wrapperStyle = css`
   display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
   flex-direction: column;
   justify-content: space-between;
   height: 500px;
+  overflow-y: scroll;
 `
 
 export const linkStyle = css`

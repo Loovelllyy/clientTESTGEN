@@ -1,7 +1,6 @@
-import React from "react";
+import React, {useMemo} from "react";
 import Test from "../Test";
 import {css} from "@emotion/react"
-import {Link, useParams} from "react-router-dom";
 
 interface ITest {
 	id: number,
@@ -11,10 +10,18 @@ interface ITest {
 interface IProps {
 	data: ITest[],
 	admin: boolean,
-	isUpdate: () => void
+	isUpdate: () => void,
 }
 
 const TestList = ({data, admin, isUpdate}: IProps) => {
+
+	const testsMemo = useMemo(() => {
+		return data.map(el =>
+				<Test key={el.id} nameTest={el.nameTest} id={el.id} admin={admin} isUpdate={isUpdate}/>
+		)
+	}, [data, admin, isUpdate])
+
+	console.log(testsMemo)
 
 	const styleWrapper = css`
       	background: var(--bgList);
@@ -39,10 +46,7 @@ const TestList = ({data, admin, isUpdate}: IProps) => {
 
 	return (
 		<div css={ styleWrapper }>
-			{data.map(el =>
-					<Test key={el.id} nameTest={el.nameTest} id={el.id} admin={admin} isUpdate={isUpdate}/>
-				// </Link>
-			)}
+			{testsMemo.map(test => test)}
 		</div>
 	)
 }

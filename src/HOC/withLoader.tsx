@@ -1,7 +1,7 @@
-import React, {useEffect, useState, ComponentType} from 'react';
+import React, {useEffect, useState} from 'react';
 import Loader from "../Components/Loader";
 
-function withLoader(WrappedComponent: ComponentType<any>) {
+function withLoader(WrappedComponent: React.FC<{}>) {
 
 	const hoc = () => {
 

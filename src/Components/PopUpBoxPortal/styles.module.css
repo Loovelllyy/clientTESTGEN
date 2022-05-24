@@ -11,13 +11,26 @@
 }
 
 .box {
-    width: 80%;
+    width: 80vw;
     box-sizing: border-box;
     padding: 20px;
     height: 50vh;
-    background: var(--bgList);
     display: grid;
+    background: var(--bgList);
     border-radius: 5px;
     text-align: center;
+    position: relative;
+
 }
 
+.btnDel {
+    z-index: 1;
+    top: 20px;
+    right: 20px;
+}
+
+.icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}

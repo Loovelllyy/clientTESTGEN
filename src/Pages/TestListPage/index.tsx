@@ -15,17 +15,16 @@ const TestListPage = () => {
 
 	const [data, setData] = useState([]);
 	const [admin, setAdmin] = useState(false);
-	const [popUpType, setPopUpType] = useState<'' | 'exit' | 'load'>('');
+	const [popUpType, setPopUpType] = useState<'exit' | 'load'>();
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoad, setIsLoad] = useState(false);
 	const nav = useNavigate();
 
-	const getTestList = useCallback( async () => {
-		await getTest().then(data => {
+		const getTestList = async () => {
+			getTest().then(data => {
 			setData(data.data);
 			setAdmin(data.admin);
-		})
-	}, []);
+		})}
 
 	useEffect(() => {
 		getTestList()
@@ -40,10 +39,14 @@ const TestListPage = () => {
 		setIsOpen(false)
 	};
 
-	const updateTest = () => {
+	const updateTest = useCallback(() => {
 		setIsLoad(true);
-		getTestList().then(() => setIsLoad(false));
-	}
+		getTestList().then(() => {
+			setIsLoad(false);
+			exitPopUp();
+		});
+	}, []);
+
 
 	const loadTest = () => {
 		setIsOpen(true)
@@ -68,7 +71,7 @@ const TestListPage = () => {
 			{admin ? <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}} onClick={logOf}> Выйти </Button> :
 					 <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}} onClick={() => nav(PATHclient.HomePage)}> На главную </Button>
 			}
-				<PopUpBoxPortal isOpen={isOpen} exit={exitPopUp} isUpdate={updateTest} type={popUpType} />
+			{ isOpen ? <PopUpBoxPortal exitPopUp={exitPopUp} isUpdate={updateTest} type={popUpType}/> : null }
 			</div>
 	);
 };

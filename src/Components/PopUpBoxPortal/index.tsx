@@ -1,45 +1,40 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import style from './style.module.css'
+import styles from './styles.module.css'
 import LoadPopUp from "../PopUps/LoadPopUp";
 import ExitPopUp from "../PopUps/ExitPopUp";
+import {Button} from "@mui/material";
+import {RiCloseFill} from "react-icons/ri";
 
 
 interface IProps {
-	type: 'exit' | 'load' | '',
-	exit: () => void;
+	type: 'exit' | 'load',
+	exitPopUp: () => void;
 	isUpdate: () => void;
-	isOpen: boolean;
 }
 
-function PopUpBoxPortal({exit, type, isUpdate, isOpen}: IProps) {
+function PopUpBoxPortal({exitPopUp, type, isUpdate}: IProps) {
 
-	if (!isOpen) return null;
+	let currentElm
 
-	if (type === 'exit') {
+	switch (type){
+		case "exit":
+			currentElm = <ExitPopUp />
+			break;
+		case "load":
+			currentElm = <LoadPopUp isUpdate={isUpdate}/>
+	}
+
 		return (
 			ReactDOM.createPortal(
-				<div className={style.wrapper}>
-					<div className={style.box}>
-						<ExitPopUp exit={exit} />
+				<div className={styles.wrapper}>
+					<div className={styles.box}>
+						<Button sx={{ position: 'absolute' }} color='secondary' onClick={exitPopUp} className={`${styles.btnDel} ${styles.icon}`} ><RiCloseFill /></Button>
+						{currentElm}
 					</div>
 				</div>,
 				document.body)
 		)
-	}
-	if (type === "load") {
-		return (
-			ReactDOM.createPortal(
-					<div className={style.wrapper}>
-					<div className={style.box}>
-						<LoadPopUp exit={exit} isUpdate={isUpdate}/>
-					</div>
-				</div>,
-				document.body)
-		)
-	}
-
-	else return null
 }
 
 export default PopUpBoxPortal;

@@ -6,16 +6,15 @@ import {css} from "@emotion/react";
 import {Button, TextField} from "@mui/material";
 import {HiOutlineUpload} from "react-icons/hi";
 
-import {btn, icon, input, label, wrapper} from "../../PopUps/LoadPopUp/style";
+import styles from "../../PopUps/LoadPopUp/styles.module.css";
 import {parseFunc} from "../../../hendlers/parserTextFile";
 import {PATHreq} from "../../../Requests/URLs";
 
 interface IProps {
-	exit: () => void;
 	isUpdate: () => void
 }
 
-const Form = ({exit, isUpdate}: IProps) => {
+const Form = ({isUpdate}: IProps) => {
 	const {register, handleSubmit, formState: {errors, isValid}, reset, watch} = useForm({
 		mode: "onChange",
 	});
@@ -30,7 +29,6 @@ const Form = ({exit, isUpdate}: IProps) => {
 			let [qw, correct] = parseFunc(reader.result.toString());
 			axios.post(`${PATHreq.saveTest}`, {nameTest, qw, correct}).then(d => d);
 			isUpdate();
-			exit()
 		}
 		reader.onerror = () => {
 			console.log(reader.error);
@@ -48,7 +46,7 @@ const Form = ({exit, isUpdate}: IProps) => {
 				width: 100%;
 								
 		`} >
-			<div css={wrapper}>
+			<div className={styles.wrapper}>
 				<TextField label='Введите название теста'
 						   variant='standard'
 						   color='secondary'
@@ -59,23 +57,23 @@ const Form = ({exit, isUpdate}: IProps) => {
 						   error={!!errors?.fileName}
 						   helperText={errors?.fileName ? errors?.fileName?.message : false}
 				/>
-				{ watch('inpFile') && watch('inpFile')[0]?.name && <p css={css`color: black`}>{watch('inpFile')[0].name || <div />}</p> }
+				{ watch('inpFile') && watch('inpFile')[0]?.name && <p css={css`color: black`}>{watch('inpFile')[0].name}</p> }
 			</div>
 
 			<div css={css`display: flex;
 			  align-items: center;
 			  justify-content: space-around;
 			  width: 100%`}>
-				<Button color='secondary' css={btn}>
-					<label css={label}>
-						<input type="file" css={input}
+				<Button color='secondary'  className={styles.btn}>
+					<label className={styles.label}>
+						<input type="file" className={styles.input}
 							   {...register('inpFile', {required: 'Обязательное поле'})}
 						/>
-						<HiOutlineUpload css={icon}/>
-						Выберите файл...
+						<HiOutlineUpload className={styles.icon}/>
+						Переместите файл сюда или выберите его
 					</label>
 				</Button>
-				<Button color='secondary' css={btn} type='submit' disabled={!isValid}>Сохранить</Button>
+				<Button color='secondary' css={styles.btn} type='submit' disabled={!isValid}>Сохранить</Button>
 			</div>
 		</form>
 	)

@@ -1,33 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import {css} from "@emotion/react";
 
 import Logo from '~media/logo.png'
 import {PATHclient} from "../../Requests/URLs";
-import {checkedCookie} from "../../Requests/requests";
 
 const StartPage = () => {
-
     const goLink = useNavigate();
 
-    const [isAdminLink, setIsAdminLink] = useState(PATHclient.LogInPage);
-    const [student, setStudent] = useState(true)
-
     const goLogin = () => {
-        goLink(isAdminLink)
+        goLink(PATHclient.LogInPage)
     }
     const goTestList = () => {
         goLink(PATHclient.TestListPage)
     }
-    useEffect(() => {
-        checkedCookie().then(d => {
-            if(d.data) {
-                setStudent(false);
-                setIsAdminLink(PATHclient.TestListPage);
-            }
-        })
-    }, [])
 
     const style = css`
         display: flex;
@@ -63,7 +50,7 @@ const StartPage = () => {
                     <img src={Logo} alt='Logo' css={css` height: 100%; width: 100% `} />
                 </div>
                 <Button variant='outlined' onClick={goLogin}>Я преподаватель</Button>
-                {student? <Button variant='outlined' onClick={goTestList}>Я студент</Button> : null}
+                <Button variant='outlined' onClick={goTestList}>Я студент</Button>
             </Box>
     )
 }

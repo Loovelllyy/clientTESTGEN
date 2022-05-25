@@ -27,8 +27,7 @@ const Form = ({isUpdate}: IProps) => {
 		reader.readAsText(inpFile[0]);
 		reader.onload = () => {
 			let [qw, correct] = parseFunc(reader.result.toString());
-			axios.post(`${PATHreq.saveTest}`, {nameTest, qw, correct}).then(d => d);
-			isUpdate();
+			axios.post(`${PATHreq.saveTest}`, {nameTest, qw, correct}).then(d => d).then(() => isUpdate())
 		}
 		reader.onerror = () => {
 			console.log(reader.error);

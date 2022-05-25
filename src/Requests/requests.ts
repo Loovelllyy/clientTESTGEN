@@ -5,7 +5,7 @@ interface ITest {
 	nameTest: string,
 }
 
-interface IGetTest {
+export interface IGetTest {
 	data: ITest[],
 	admin: boolean,
 }

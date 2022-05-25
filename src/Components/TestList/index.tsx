@@ -13,7 +13,7 @@ interface IProps {
 	isUpdate: () => void,
 }
 
-const TestList = ({data, admin, isUpdate}: IProps) => {
+const TestList = React.memo(({data, admin, isUpdate}: IProps) => {
 
 	const testsMemo = useMemo(() => {
 		return data.map(el =>
@@ -49,6 +49,6 @@ const TestList = ({data, admin, isUpdate}: IProps) => {
 			{testsMemo.map(test => test)}
 		</div>
 	)
-}
+})
 
 export default TestList;

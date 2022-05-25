@@ -9,73 +9,67 @@ import withLoader from "../../HOC/withLoader";
 import TestList from '../../Components/TestList';
 import PopUpBoxPortal from "../../Components/PopUpBoxPortal";
 import {useNavigate} from "react-router-dom";
-import {getTest} from "../../Requests/requests";
+import {IGetTest} from "../../Requests/requests";
+import ExitPopUp from "../../Components/PopUps/ExitPopUp";
+import LoadPopUp from "../../Components/PopUps/LoadPopUp";
+import withData from "../../HOC/withData";
 
-const TestListPage = () => {
+const TestListPage = ({dataFromServ, reloadData}: { dataFromServ: IGetTest, reloadData: () => void }) => {
 
 	const [data, setData] = useState([]);
 	const [admin, setAdmin] = useState(false);
-	const [popUpType, setPopUpType] = useState<'exit' | 'load'>();
-	const [isOpen, setIsOpen] = useState(false);
-	const [isLoad, setIsLoad] = useState(false);
+	const [isExitP, setIsExitP] = useState(false);
+	const [isLoadP, setIsLoadP] = useState(false);
 	const nav = useNavigate();
 
-		const getTestList = async () => {
-			getTest().then(data => {
-			setData(data.data);
-			setAdmin(data.admin);
-		})}
-
 	useEffect(() => {
-		getTestList()
-	}, []);
+		if (dataFromServ?.data) {
+			setData(dataFromServ?.data);
+			setAdmin(dataFromServ?.admin);
+		}
+	}, [dataFromServ]);
 
 	const logOf = () => {
-		setIsOpen(true)
-		setPopUpType('exit')
+		setIsExitP(true);
 	};
 
 	const exitPopUp = () => {
-		setIsOpen(false)
+		setIsExitP(false);
+		setIsLoadP(false);
 	};
 
 	const updateTest = useCallback(() => {
-		setIsLoad(true);
-		getTestList().then(() => {
-			setIsLoad(false);
-			exitPopUp();
-		});
+		// setIsLoading(true);
+		// getTestList().then(() => {
+		// 	setIsLoading(false);
+		reloadData();
+		exitPopUp();
+		// });
 	}, []);
 
 
 	const loadTest = () => {
-		setIsOpen(true)
-		setPopUpType('load')
+		setIsLoadP(true);
 	}
 
 	return (
 		<div css={wrapperStyle}>
 			{admin ?
 				<Button
-					css={css`position: absolute;
-				  	top: 0;
-				  	right: 0;
-				  	margin: 30px;
-				  	border: 1px solid #3E514A`}
+					css={css`position: absolute; top: 0; right: 0; margin: 30px; border: 1px solid #3E514A`}
 					color='secondary'
-					onClick={loadTest}>
-					Загрузить тест
-				</Button> : null}
+					onClick={loadTest} >Загрузить тест</Button> : null}
 			{admin ? <h2>Доступные тесты</h2> : < h1> Выберите нужный тест</h1>}
 			<TestList data={data} admin={admin} isUpdate={updateTest}/>
 			{admin ? <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}} onClick={logOf}> Выйти </Button> :
-					 <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}} onClick={() => nav(PATHclient.HomePage)}> На главную </Button>
+					 <Button color="secondary" sx={{mt: '20px', border: '1px solid #3E514A'}} onClick={() => nav(PATHclient.HomePage)}>На главную</Button>
 			}
-			{ isOpen ? <PopUpBoxPortal exitPopUp={exitPopUp} isUpdate={updateTest} type={popUpType}/> : null }
+			{ isExitP && <PopUpBoxPortal exitPopUp={exitPopUp} Child={ <ExitPopUp exitPopUp={exitPopUp} /> } /> }
+			{ isLoadP && <PopUpBoxPortal exitPopUp={exitPopUp} Child={ <LoadPopUp isUpdate={ updateTest } /> } /> }
 			</div>
 	);
 };
 
-const WrappedPage = withLoader(TestListPage)
+const WrappedPage = withLoader(withData(TestListPage));
 
 export default WrappedPage;

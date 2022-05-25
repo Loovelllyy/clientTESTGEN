@@ -5,8 +5,11 @@ import {PATHclient} from "../../../Requests/URLs";
 import {css} from "@emotion/react";
 import {request} from "../../../Requests";
 
+interface IProps {
+	exitPopUp: () => void
+}
 
-function ExitPopUp() {
+function ExitPopUp({exitPopUp}: IProps) {
 
 	const goHome = useNavigate();
 
@@ -20,7 +23,7 @@ function ExitPopUp() {
 		<>
 			<p>Вы действительно хотите выйти?</p>
 			<Button color='secondary' onClick={exitAdmin}>Да, хочу выйти</Button>
-			<Button color='secondary' css={css`border: 1px solid #2e4f47`}>Нет, хочу остаться</Button>
+			<Button color='secondary' css={css`border: 1px solid #2e4f47`} onClick={exitPopUp}>Нет, хочу остаться</Button>
 		</>
 	);
 }

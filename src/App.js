@@ -9,6 +9,7 @@ import QuestionPage from "./Pages/QuestionPage";
 import Loader from "./Components/Loader";
 import ResultPage from "./Pages/ResultPage";
 import TestListPage from "./Pages/TestListPage";
+import TestPage from "./Pages/TestPage";
 
 
 const myTheme = createTheme({
@@ -30,22 +31,21 @@ const myTheme = createTheme({
 
 function App() {
 
-
 	return (
-		<ThemeProvider theme={myTheme}>
-			<BrowserRouter>
-				<Routes>
-					<Route path='*' element={ <NotFoundPage/> }/>
-					<Route path='/' element={<StartPage/>}/>
-					<Route path='/logIn' element={<LogIn/>}/>
-					<Route path='/test' element={<Loader/>}/>
-					<Route path='/result/:id' element={<ResultPage/>}/>
-					<Route path='/testListPage' element={<TestListPage/>}/>
-					<Route path={`/question/:id`} element={<QuestionPage/>}/>
-				</Routes>
-			</BrowserRouter>
-		</ThemeProvider>
-
+			<ThemeProvider theme={myTheme}>
+				<BrowserRouter>
+					<Routes>
+						<Route path='*' element={ <NotFoundPage/> }/>
+						<Route path='/' element={<StartPage/>}/>
+						<Route path='/logIn' element={<LogIn/>}/>
+						<Route path='/test' element={<Loader/>}/>
+						<Route path='/result/:id' element={<ResultPage/>}/>
+						<Route path='/testListPage' element={<TestListPage/>}/>
+						<Route path={`/question/:id`} element={<QuestionPage/>}/>
+						<Route path={`/TestPage`} element={<TestPage/>}/>
+					</Routes>
+				</BrowserRouter>
+			</ThemeProvider>
 	);
 }
 

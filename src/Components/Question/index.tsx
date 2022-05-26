@@ -5,11 +5,10 @@ import {style, wrapper} from './styles'
 import axios from "axios";
 import { PATHreq } from "../../Requests/URLs";
 import FormFormik from "./FormFormik";
+import withData from "../../HOC/withData";
+import {useAppSelector} from "../../HOOKS/redux";
+import {getQuestions, IGetTest} from "../../Requests/requests";
 
-
-interface IProps {
-	id: string
-}
 interface IDataVal {
 	question: string;
 	answer: string[];
@@ -28,20 +27,30 @@ export const s = css`
   border-radius: var(--borderRadius);
 `
 
-const Question = ({id}: IProps) => {
+const Question = () => {
 
 	const [currentData, currentDataSet] = useState<IDataVal>();
 	const [data, setData] = useState<IDataVal[]>();
 
-	const getData = async () => {
-		axios.get(`${PATHreq.getTestById}?id=${id}`).then(({data}: { data: IData }) => {
-			setData(data.data);
-			currentDataSet(data.data[0]);
-		})
-	}
+	const id = useAppSelector(state => state.idReducer.id)
+
+	// const getData = async () => {
+	// 	axios.get(`${PATHreq.getTestById}?id=${id}`).then(({data}: { data: IData }) => {
+	// 		setData(data.data);
+	// 		currentDataSet(data.data[0]);
+	// 	})
+	// }
 
 	useEffect(() => {
-		getData()
+		// axios.get(`${PATHreq.getTestById}?id=${id}`).then(({data}: { data: IData }) => {
+		// 	setData(data.data);
+		// 	currentDataSet(data.data[0]);
+		// })
+		getQuestions(id).then(data => {
+			console.log(data)
+			// setData(data.data);
+			// currentDataSet(data.data[0]);
+		})
 	}, []);
 
 

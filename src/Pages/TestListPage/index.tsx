@@ -39,12 +39,8 @@ const TestListPage = ({dataFromServ, reloadData}: { dataFromServ: IGetTest, relo
 	};
 
 	const updateTest = useCallback(() => {
-		// setIsLoading(true);
-		// getTestList().then(() => {
-		// 	setIsLoading(false);
 		reloadData();
 		exitPopUp();
-		// });
 	}, []);
 
 

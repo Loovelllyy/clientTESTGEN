@@ -11,7 +11,6 @@ function withData(WrappedComponent: TProps ) {
 		const reloadData = () => {
 			getTest().then(d => {
 				setStateData(d);
-				console.log(d);
 			});
 		}
 

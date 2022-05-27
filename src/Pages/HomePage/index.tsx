@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import WaitingBackground from "../../Components/WaitingBackground";
 import TestListPage from "../TestListPage";
-// import axios from "axios";
 
 const HomePage = () => {
     let [data1, setData1] = useState(0);

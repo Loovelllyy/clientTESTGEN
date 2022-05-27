@@ -9,20 +9,25 @@ export interface IGetTest {
 	data: ITest[],
 	admin: boolean,
 }
-//
-// interface IDataAuth {
-// 	login: string,
-// 	password: string
-// }
+
+interface IQuestions {
+	question: string;
+	answer: string[];
+	correct?: string;
+}
 
 export const getTest = () => {
-	return request<IGetTest>('get', 'getTests')
+	return request<IGetTest>('get', 'getTests');
 }
 
 export const checkedCookie = () => {
-	return request<{data: boolean}>('get', 'checkedCookie')
+	return request<{data: boolean}>('get', 'checkedCookie');
 }
 
 export const checkAuth = (data: unknown) => {
 	return request<{data: string}>('post', 'auth', data);
+}
+
+export const getQuestions = (query: string) => {
+	return request<IQuestions[]>('get', 'getTestById', {data: null}, query);
 }

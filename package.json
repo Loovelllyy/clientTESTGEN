@@ -65,6 +65,7 @@
     "@mui/material": "^5.5.2",
     "@mui/styled-engine-sc": "^5.5.2",
     "@reduxjs/toolkit": "^1.8.1",
+    "@types/node-fetch": "^2.6.1",
     "@types/react-test-renderer": "^18.0.0",
     "axios": "^0.26.1",
     "d3": "^7.4.3",
@@ -78,6 +79,7 @@
     "react-router-dom": "^6.2.2",
     "react-test-renderer": "^18.1.0",
     "styled-components": "^5.3.5",
+    "ts-jest": "^27.1.5",
     "yup": "^0.32.11"
   }
 }

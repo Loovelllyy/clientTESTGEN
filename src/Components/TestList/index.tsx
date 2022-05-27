@@ -3,7 +3,7 @@ import Test from "../Test";
 import {css} from "@emotion/react"
 
 interface ITest {
-	id: number,
+	id: string,
 	nameTest: string,
 }
 
@@ -17,11 +17,9 @@ const TestList = React.memo(({data, admin, isUpdate}: IProps) => {
 
 	const testsMemo = useMemo(() => {
 		return data.map(el =>
-				<Test key={el.id} nameTest={el.nameTest} id={el.id} admin={admin} isUpdate={isUpdate}/>
+			<Test key={el.id} nameTest={el.nameTest} id={el.id} admin={admin} isUpdate={isUpdate}/>
 		)
-	}, [data, admin, isUpdate])
-
-	console.log(testsMemo)
+	}, [data, admin, isUpdate]);
 
 	const styleWrapper = css`
       	background: var(--bgList);

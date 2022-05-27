@@ -6,10 +6,15 @@ type TUrl = keyof typeof PATHreq;
 
 /*
 *
-* принимает метод, url и data,
-* возвращает Promise с данными типа T
+* возвращает Promise с данными переданного типа (<T>)
+*
+* @param url (:string)
+* @param method - метод axios (:string)
+* @param data (необязательный) данные для отправки (: unknown)
+* @query (необязательный) выполнит запрос типа axios.method(url?id=query)
 *
 * */
-export const request = async <T>(method: TMethod, url: TUrl, data?: unknown) => {
+export const request = async <T>(method: TMethod, url: TUrl, data?: unknown, query?: string) => {
+	if (query) return axios[method]?.<T>(`${PATHreq[url]}?id=${query}`, data).then(d => d.data);
 	return axios[method]?.<T>(PATHreq[url], data).then(d => d.data);
 }

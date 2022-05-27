@@ -2,21 +2,14 @@ import React, {useEffect, useState} from "react";
 import {css} from "@emotion/react"
 
 import {style, wrapper} from './styles'
-import axios from "axios";
-import { PATHreq } from "../../Requests/URLs";
 import FormFormik from "./FormFormik";
+import {useAppSelector} from "../../HOOKS/useAppSelector";
+import {getQuestions} from "../../Requests/requests";
 
-
-interface IProps {
-	id: string
-}
 interface IDataVal {
 	question: string;
 	answer: string[];
 	correct?: string;
-}
-interface IData {
-	data: IDataVal[]
 }
 
 export const s = css`
@@ -28,23 +21,19 @@ export const s = css`
   border-radius: var(--borderRadius);
 `
 
-const Question = ({id}: IProps) => {
+const Question = () => {
 
 	const [currentData, currentDataSet] = useState<IDataVal>();
 	const [data, setData] = useState<IDataVal[]>();
 
-	const getData = async () => {
-		axios.get(`${PATHreq.getTestById}?id=${id}`).then(({data}: { data: IData }) => {
-			setData(data.data);
-			currentDataSet(data.data[0]);
-		})
-	}
+	const id = useAppSelector(state => state.idReducer.id)
 
 	useEffect(() => {
-		getData()
+		getQuestions(id).then(data => {
+			setData(data);
+			currentDataSet(data[0]);
+		})
 	}, []);
-
-
 
 	return (
 		<div css={wrapper}>

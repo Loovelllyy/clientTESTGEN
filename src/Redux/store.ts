@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {counterReducer} from "./sliceCounter";
-import {idReducer} from "./sliceId";
+import {counterReducer} from "./Slices/sliceCounter";
+import {idReducer} from "./Slices/sliceId";
+import {themeReducer} from "./Slices/sliceTheme";
 
 const rootReducer = combineReducers({
-	counterReducer, idReducer
+	counterReducer, idReducer, themeReducer
 });
 /*
  configureStore - создаём хранилище, которе будет доступно далее всему приложению
@@ -12,11 +13,10 @@ const rootReducer = combineReducers({
  хук useSelector позволяет вытащить нужно значение из стора
  хук useDispatch позволяет отправить action
 */
-// export const setupStore = () => {
+
 export const createStore = () => configureStore({
 		reducer: rootReducer
 	})
-// };
 
 export type TRootState = ReturnType<typeof rootReducer>;
 export type TAppStore = ReturnType<typeof createStore>;

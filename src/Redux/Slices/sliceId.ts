@@ -8,7 +8,7 @@ const initialState: IInitalState = {
 	id: '',
 }
 
-const mySlice = createSlice({
+const idSlice = createSlice({
 	name: 'testSlice',
 	initialState,
 	reducers: {
@@ -18,6 +18,6 @@ const mySlice = createSlice({
 	}
 })
 
-export const { changeCurrentId } = mySlice.actions;
+export const { changeCurrentId } = idSlice.actions;
 
-export const idReducer = mySlice.reducer;
+export const idReducer = idSlice.reducer;

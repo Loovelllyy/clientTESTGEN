@@ -14,7 +14,7 @@ const initialState: IInitalState = {
 	counter: 0,
 }
 
-const mySlice = createSlice({
+const testCounterSlice = createSlice({
 	name: 'testSlice',
 	initialState,
 	reducers: {
@@ -27,6 +27,6 @@ const mySlice = createSlice({
 	}
 })
 
-export const {add, minus} = mySlice.actions;
+export const {add, minus} = testCounterSlice.actions;
 
-export const counterReducer = mySlice.reducer;
+export const counterReducer = testCounterSlice.reducer;

@@ -1,0 +1,21 @@
+.dark {
+    height: 100%;
+
+    color: #67836d;
+
+    --bgGradient: linear-gradient(45deg, #4e6c6c 0%, #2a443e 100%);
+    --mainColorText: #b9b9b9;
+    --bgMainColor: #3b4d3f;
+    --bgList: #2f493e;
+    --bgTotal: #656c66;
+
+}
+
+
+.light {
+    height: 100%;
+}
+
+.changeButton {
+    position: absolute;
+}

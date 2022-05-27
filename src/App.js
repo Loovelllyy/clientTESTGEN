@@ -1,6 +1,7 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import { ThemeProvider, createTheme } from '@mui/material';
+import {ThemeProvider, createTheme, Button} from '@mui/material';
+import indexStyle from './index.module.css'
 
 import StartPage from "./Pages/StartPage";
 import LogIn from "./Pages/LogInPage";
@@ -10,6 +11,7 @@ import Loader from "./Components/Loader";
 import ResultPage from "./Pages/ResultPage";
 import TestListPage from "./Pages/TestListPage";
 import TestPage from "./Pages/TestPage";
+import useTheme from "./HOOKS/useTheme";
 
 
 const myTheme = createTheme({
@@ -30,9 +32,14 @@ const myTheme = createTheme({
 })
 
 function App() {
+	const { theme, toggleTheme } = useTheme();
+
+
 
 	return (
+		<div className={ indexStyle[theme] }>
 			<ThemeProvider theme={myTheme}>
+				<Button  sx={{position: "absolute"}} onClick={() => {toggleTheme()}}>Сменить тему</Button>
 				<BrowserRouter>
 					<Routes>
 						<Route path='*' element={ <NotFoundPage/> }/>
@@ -46,6 +53,7 @@ function App() {
 					</Routes>
 				</BrowserRouter>
 			</ThemeProvider>
+		</div>
 	);
 }
 

@@ -5,9 +5,11 @@ import {useNavigate} from "react-router-dom";
 import {Button} from "@mui/material";
 import axios from "axios";
 import {PATHreq} from "../../Requests/URLs";
+import {changeCurrentId} from "../../Redux/Slices/sliceId";
+import {useAppDispatch} from "../../HOOKS/useAppDispatch";
 
 interface IProps {
-    id: number,
+    id: string,
     nameTest: string,
     isUpdate: () => void
     admin?: boolean,
@@ -16,6 +18,7 @@ interface IProps {
 const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
 
     const nav = useNavigate();
+    const dispatch = useAppDispatch();
 
     const wrapperStyle = css`
         display: flex;
@@ -35,6 +38,11 @@ const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
         axios.delete(`${PATHreq.deleteTest}?id=${id}`).then(() => isUpdate())
     }
 
+    const myOnClick = () => {
+        dispatch(changeCurrentId(id));
+        nav(`/question/${id}`);
+    }
+
     if (admin) {
         return(
             <div css={ wrapperStyle } >
@@ -47,7 +55,7 @@ const Test = ({id, nameTest, admin = false, isUpdate}: IProps) => {
     }
 
     return (
-            <div css={ wrapperStyle } onClick={ () => nav(`/question/${id}`) }>
+            <div css={ wrapperStyle } onClick={ myOnClick }>
                 <AiFillFileText css={css`height: 50px; width: 50px`} />
                 <p>{nameTest}</p>
             </div>

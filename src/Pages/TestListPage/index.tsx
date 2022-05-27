@@ -5,7 +5,6 @@ import {Button} from "@mui/material";
 import {wrapperStyle} from "../../../public/style";
 import {css} from "@emotion/react";
 
-import withLoader from "../../HOC/withLoader";
 import TestList from '../../Components/TestList';
 import PopUpBoxPortal from "../../Components/PopUpBoxPortal";
 import {useNavigate} from "react-router-dom";
@@ -21,6 +20,7 @@ const TestListPage = ({dataFromServ, reloadData}: { dataFromServ: IGetTest, relo
 	const [isExitP, setIsExitP] = useState(false);
 	const [isLoadP, setIsLoadP] = useState(false);
 	const nav = useNavigate();
+
 
 	useEffect(() => {
 		if (dataFromServ?.data) {
@@ -66,6 +66,6 @@ const TestListPage = ({dataFromServ, reloadData}: { dataFromServ: IGetTest, relo
 	);
 };
 
-const WrappedPage = withLoader(withData(TestListPage));
+const WrappedPage = withData(TestListPage);
 
 export default WrappedPage;

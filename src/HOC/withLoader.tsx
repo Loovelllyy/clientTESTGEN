@@ -10,7 +10,6 @@ function withLoader(WrappedComponent: React.FC<{}>) {
 		useEffect(() => {
 				setTimeout(() => {
 					isDoneSet(true)
-					// });
 				}, 1500)
 			return () => { isDoneSet(false) }
 		}, [])
